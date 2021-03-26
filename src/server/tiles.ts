@@ -21,6 +21,7 @@ enum SocketType {
   PavementPure = 1,
   PavementEdge = 2,
   PavementEdgeAdjacent,
+  PavementEdgeDoubleAdjacent,
 }
 
 interface TileData {
@@ -58,6 +59,65 @@ function getSocketsFromImageName(imageName: string) {
         negX: SocketType.PavementEdgeAdjacent,
         posY: SocketType.PavementEdge,
         negY: SocketType.PavementPure,
+      };
+
+    case "tile_0013.png":
+      return {
+        posX: SocketType.PavementEdgeAdjacent,
+        negX: SocketType.PavementPure,
+        posY: SocketType.PavementPure,
+        negY: SocketType.PavementEdgeAdjacent,
+      };
+
+    case "tile_0015.png":
+      return {
+        posX: SocketType.PavementEdge,
+        negX: SocketType.PavementEdge,
+        posY: SocketType.PavementEdge,
+        negY: SocketType.PavementEdgeDoubleAdjacent,
+      };
+
+    case "tile_0036.png" ||
+      "tile_0117.png" ||
+      "tile_0913.png" ||
+      "tile_0914.png":
+      return {
+        posX: SocketType.PavementPure,
+        negX: SocketType.PavementPure,
+        posY: SocketType.PavementPure,
+        negY: SocketType.PavementPure,
+      };
+
+    case "tile_0042.png":
+      return {
+        posX: SocketType.PavementEdge,
+        negX: SocketType.PavementEdge,
+        posY: SocketType.PavementEdgeDoubleAdjacent,
+        negY: SocketType.PavementEdgeDoubleAdjacent,
+      };
+
+    case "tile_0068.png":
+      return {
+        posX: SocketType.PavementEdge,
+        negX: SocketType.PavementEdge,
+        posY: SocketType.PavementEdge,
+        negY: SocketType.PavementEdge,
+      };
+
+    case "tile_0068.png":
+      return {
+        posX: SocketType.PavementEdge,
+        negX: SocketType.PavementEdge,
+        posY: SocketType.PavementEdge,
+        negY: SocketType.PavementEdge,
+      };
+
+    case "tile_0028.png":
+      return {
+        posX: SocketType.Grass,
+        negX: SocketType.Grass,
+        posY: SocketType.Grass,
+        negY: SocketType.Grass,
       };
 
     default:
