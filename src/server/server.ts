@@ -1,21 +1,25 @@
-import * as http from "http";
 import { getAllTileData } from "./tiles";
+import express from "express";
+import cors from "cors";
 
-http
-  .createServer((req, res) => {
-    // Set CORS headers
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Request-Method", "*");
-    res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET");
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    if (req.method === "OPTIONS") {
-      res.writeHead(200);
-      res.end();
-      return;
-    }
+const app = express();
+const port = 5001; // default port to listen
 
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.write(JSON.stringify(getAllTileData()));
-    res.end();
-  })
-  .listen(5001);
+var corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200, // For legacy browser support
+};
+
+app.use(cors(corsOptions));
+app.use("/images", express.static("images"));
+
+// define a route handler for the default home page
+app.get("/tiles", (req, res) => {
+  const allTiles = JSON.stringify(getAllTileData());
+  res.send(allTiles);
+});
+
+// start the Express server
+app.listen(port, () => {
+  console.log(`server started at http://localhost:${port}`);
+});

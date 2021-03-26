@@ -14,6 +14,7 @@
     "strictFunctionTypes": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "rootDir": "./"
+    "rootDir": "./",
+    "watch": true
   },
 }

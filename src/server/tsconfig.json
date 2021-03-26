@@ -18,6 +18,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "../../dist/",
-    "rootDir": "./"
+    "rootDir": "./",
+    "watch": true
   },
 }

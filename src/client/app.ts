@@ -20,7 +20,7 @@ interface TileData {
   negY: SocketType;
 }
 
-fetch("http://localhost:5001").then(async (res) => {
+fetch("http://localhost:5001/tiles").then(async (res) => {
   console.log(res.status);
   const allTiles = (await res.json()) as TileData[];
   console.log(allTiles);
@@ -44,7 +44,7 @@ function makeGridItem(image: HTMLImageElement, id: string): HTMLDivElement {
 
 function makeImageTile(imagePath: string): HTMLImageElement {
   let defaultImage = document.createElement("img");
-  defaultImage.src = `http://localhost:5001/tiles/${imagePath}`; //"images/simpleTileset/Grass/tile_0028.png";
+  defaultImage.src = `http://localhost:5001/images/${imagePath}`; //"images/simpleTileset/Grass/tile_0028.png";
   defaultImage.className = "tile";
   return defaultImage;
 }
