@@ -77,10 +77,10 @@ function getSocketsFromImageName(imageName: string) {
         negY: SocketType.PavementEdgeDoubleAdjacent,
       };
 
-    case "tile_0036.png" ||
-      "tile_0117.png" ||
-      "tile_0913.png" ||
-      "tile_0914.png":
+    case "tile_0036.png":
+    case "tile_0117.png":
+    case "tile_0913.png":
+    case "tile_0914.png":
       return {
         posX: SocketType.PavementPure,
         negX: SocketType.PavementPure,
