@@ -1,0 +1,23 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2019",
+    "lib": ["ES2019"],
+    "strict": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "allowJs": false,
+    "inlineSourceMap": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "strictFunctionTypes": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "../../dist/",
+    "rootDir": "./"
+  },
+}
