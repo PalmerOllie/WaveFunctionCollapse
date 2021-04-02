@@ -10,8 +10,10 @@ var corsOptions = {
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
+
 app.use(cors(corsOptions));
 app.use("/images", express.static("images"));
+app.use("/favicon.ico", express.static("favicon.ico"));
 
 // define a route handler for the default home page
 app.get("/tiles", (req, res) => {
