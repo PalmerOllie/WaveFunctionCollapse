@@ -1,3 +1,6 @@
+import { WFC } from "./waveFuntionCollapse";
+import { TileData } from "./tileTypes";
+
 const heading = document.createElement("h1");
 heading.textContent = "Hello, TypeScript!"; //+ getRandomFileInFolder();
 document.body.appendChild(heading);
@@ -6,33 +9,27 @@ const grid = document.createElement("div");
 grid.className = "grid-container";
 document.body.appendChild(grid);
 
-enum SocketType {
-  Grass = 0,
-  PurePavement = 1,
-  PavementEdge,
-}
-
-interface TileData {
-  imageSrc: string;
-  posX: SocketType;
-  negX: SocketType;
-  posY: SocketType;
-  negY: SocketType;
-}
+const mapWidth = 20;
+const mapHeight = 5;
 
 fetch("http://localhost:5001/tiles").then(async (res) => {
   console.log(res.status);
-  const allTiles = (await res.json()) as TileData[];
+  const allTiles = (await res.json()) as TileData[]; //Array containing exactly one of each tile
   console.log(allTiles);
-
   const someTile = allTiles[0];
 
-  for (let i = 0; i < 100; i++) {
+  let collapsedWaveTiles: TileData[] = WFC(allTiles);
+  displayGrid(collapsedWaveTiles);
+});
+
+function displayGrid(tilesToDisplay: TileData[]) {
+  for (let i = 0; i < mapWidth * mapHeight; i++) {
+    const someTile = tilesToDisplay[i];
     grid.appendChild(
       makeGridItem(makeImageTile(someTile.imageSrc), `tile${i}`)
     );
   }
-});
+}
 
 function makeGridItem(image: HTMLImageElement, id: string): HTMLDivElement {
   let gridItem = document.createElement("div");

@@ -38,18 +38,16 @@
     "prettier": "2.2.1"
   },
   "nodemonConfig": {
-      "watch": [
-        "src/server"
-      ],
-      "ext": "ts",
-      "ignore": [
-        "*.test.ts"
-      ],
-      "delay": "3",
-      "execMap": {
-        "ts": "ts-node"
-      }
+    "watch": [
+      "src/server"
+    ],
+    "ext": "ts",
+    "ignore": [
+      "*.test.ts"
+    ],
+    "delay": "3",
+    "execMap": {
+      "ts": "ts-node"
     }
-
+  }
 }
-

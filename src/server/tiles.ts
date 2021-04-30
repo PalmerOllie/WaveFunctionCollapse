@@ -3,6 +3,7 @@ import { toASCII } from "node:punycode";
 
 // const exampleTileJSON = {
 //   imageName: "tile_0028.png", //grass
+// rotation:
 //   posX: SocketType.Grass,
 //   negX: SocketType.Grass,
 //   posY: SocketType.Grass,
@@ -25,7 +26,6 @@ enum SocketType {
   PavementEdgeDoubleAdjacent,
 }
 
-
 interface NeighbourLists {
   posX: TileData[];
   negX: TileData[];
@@ -39,12 +39,16 @@ interface TileData {
   negX: SocketType;
   posY: SocketType;
   negY: SocketType;
-  neighbourLists: NeighbourLists
-  rotationX: boolean,
-  rotationY: boolean
+  neighbourLists: NeighbourLists;
+  rotationX: boolean;
+  rotationY: boolean;
 }
 
 export function getAllTileData(): TileData[] {
+  fs.readdirSync("./").forEach((file) => {
+    console.log(file);
+  });
+
   let tiles: TileData[] = fs.readdirSync("images").map((file) => {
     // console.log(file);
     const sockets = getSocketsFromImageName(file);
@@ -58,7 +62,7 @@ export function getAllTileData(): TileData[] {
         negY: [],
       },
       rotationX: true,
-      rotationY: true
+      rotationY: true,
     };
   });
 
@@ -66,8 +70,16 @@ export function getAllTileData(): TileData[] {
   return tiles;
 }
 
-function canSocketConnectToRotatableTile(socket:SocketType, tileData:TileData): boolean {
-  if(socket == tileData.posX || socket == tileData.negX || socket == tileData.posY || socket == tileData.negY) {
+function canSocketConnectToRotatableTile(
+  socket: SocketType,
+  tileData: TileData
+): boolean {
+  if (
+    socket == tileData.posX ||
+    socket == tileData.negX ||
+    socket == tileData.posY ||
+    socket == tileData.negY
+  ) {
     return true;
   }
   return false;
@@ -76,10 +88,10 @@ function canSocketConnectToRotatableTile(socket:SocketType, tileData:TileData): 
 function populateNeighboursList(tileData: TileData[]) {
   let tiles: TileData[] = [];
 
-  tileData.forEach(t1 => {
+  tileData.forEach((t1) => {
     for (let index = 0; index < tileData.length; index++) {
       const t2 = tileData[index];
-      
+
       let neighbourLists: NeighbourLists = {
         posX: [],
         negX: [],
@@ -87,19 +99,18 @@ function populateNeighboursList(tileData: TileData[]) {
         negY: [],
       };
 
-      if(canSocketConnectToRotatableTile(t1.posX, t2)) {
+      if (canSocketConnectToRotatableTile(t1.posX, t2)) {
         neighbourLists.posX.push(t2);
       }
-      if(canSocketConnectToRotatableTile(t1.negX, t2)) {
+      if (canSocketConnectToRotatableTile(t1.negX, t2)) {
         neighbourLists.negX.push(t2);
       }
-      if(canSocketConnectToRotatableTile(t1.posY, t2)) {
+      if (canSocketConnectToRotatableTile(t1.posY, t2)) {
         neighbourLists.posY.push(t2);
       }
-      if(canSocketConnectToRotatableTile(t1.negY, t2)) {
+      if (canSocketConnectToRotatableTile(t1.negY, t2)) {
         neighbourLists.negY.push(t2);
       }
-
 
       const newTile: TileData = {
         imageSrc: t1.imageSrc,
@@ -109,7 +120,7 @@ function populateNeighboursList(tileData: TileData[]) {
         negY: t1.negY,
         neighbourLists: neighbourLists,
         rotationX: t1.rotationX,
-        rotationY: t1.rotationY
+        rotationY: t1.rotationY,
       };
 
       tiles.push(newTile);
